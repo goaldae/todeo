@@ -1,0 +1,11 @@
+{
+  "name": "todeo",
+  "version": "1.0.0",
+  "description": "Making a video site for my puppy Torress",
+  "main": "index.js",
+  "author": "goaldae",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
