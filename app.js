@@ -6,11 +6,11 @@ import morgan from "morgan";
 import helmet from "helmet";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import { userRouter } from "./router";
+import userRouter  from "./routers/userRouter";
+import videoRouter  from "./routers/videoRouter";
+import globalRouter from "./routers/globalRouter";
+import routes from "./routes";
 const app = express();
-
-const handleHome = (req, res) => res.send("hello from home");
-const handleProfile = (req, res) => res.send("hello from profile");
 
 //미들웨어
 app.use(morgan("tiny")); //로거
@@ -19,10 +19,10 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-app.get("/", handleHome);
-app.get("/profile", handleProfile);
-
 //라우터 사용
-app.use("/user", userRouter); //user 라우터를 "사용(use)"함
+
+app.use(routes.home, globalRouter); 
+app.use(routes.videos, videoRouter); 
+app.use(routes.users, userRouter); //user 라우터를 "사용(use)"함
 
 export default app;
