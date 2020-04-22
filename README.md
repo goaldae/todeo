@@ -5,10 +5,9 @@ Making a video site for my puppy Torress
 ## Pages:
 
 - [ ] Home
-- [ ] Join
-- [ ] Login
+- [x] Login
 - [x] Search
-- [ ] Join
+- [x] Join
 - [ ] User Detail
 - [ ] Edit Profile
 - [ ] Change Password
