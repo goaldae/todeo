@@ -20,6 +20,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(localMiddleware);
+app.use("/uploads", express.static("uploads")); //일단 /uploads 경로에 있는 것을 가져다 쓰겠다.
 
 //view engine 설정
 app.set("view engine", "pug");
