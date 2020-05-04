@@ -13,12 +13,18 @@ export const home = async (req, res) => {
 };
 
 export const search = async (req, res) => {
-  console.log(req);
-  const videos = await Video.find({});
   const {
     query: { term: searchingBy },
   } = req; //ES6 문법 const searchingBy = req.query.term; 과 같음
-
+  let videos = [];
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" }, //regular expression
+    });
+    console.log(videos);
+  } catch (error) {
+    console.log(error);
+  }
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
