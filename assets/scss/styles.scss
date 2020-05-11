@@ -1,3 +1,5 @@
+@import "config/_variables.scss";
+
 body {
-  background-attachment: red;
+  background-color: $bgColor;
 }
