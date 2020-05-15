@@ -6,10 +6,8 @@ const multerVideo = multer({ dest: "uploads/videos/" }); //비디오 업로드 �
 export const localMiddleware = (req, res, next) => {
   res.locals.siteName = "Todeo";
   res.locals.routes = routes;
-  res.locals.user = {
-    id: 2,
-    isAuthenticated: true,
-  };
+  res.locals.user = req.user || null;
+  console.log(req.user);
   next();
 };
 

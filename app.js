@@ -11,20 +11,33 @@ import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 import { localMiddleware } from "./middlewares";
+import passport from "passport";
+import session from "express-session";
+import "./passport";
+
 const app = express();
 
 //미들웨어
 app.use(helmet()); //보안 기능
-app.use(morgan("tiny")); //로거
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(localMiddleware);
+app.set("view engine", "pug"); //view engine 설정
 app.use("/uploads", express.static("uploads")); //일단 /uploads 경로에 있는 것을 가져다 쓰겠다.
-app.use("/static", express.static("static")); //일단 /uploads 경로에 있는 것을 가져다 쓰겠다.
+app.use("/static", express.static("static"));
+app.use(cookieParser());
+app.use(morgan("tiny")); //로거
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+app.use(bodyParser.json());
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: true,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-//view engine 설정
-app.set("view engine", "pug");
+app.use(localMiddleware);
 
 //라우터 사용
 app.use(routes.home, globalRouter);
