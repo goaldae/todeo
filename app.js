@@ -11,11 +11,15 @@ import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 import { localMiddleware } from "./middlewares";
-import passport from "passport";
-import session from "express-session";
-import "./passport";
+import passport from "passport"; //passport 모듈
+import mongoose from "mongoose";
+import session from "express-session"; //express session 모듈
+import "./passport"; //passport 설정파일
+import MongoStore from "connect-mongo";
 
 const app = express();
+
+const CookieStore = MongoStore(session); //session 객체가 필요함
 
 //미들웨어
 app.use(helmet()); //보안 기능
@@ -32,6 +36,10 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: true,
     saveUninitialized: false,
+    store: new CookieStore({
+      //세션과 데이터베이스 연결 : 서버를 재시작해도 세션이 그대로 있는 기능
+      mongooseConnection: mongoose.connection,
+    }),
   })
 );
 app.use(passport.initialize());
