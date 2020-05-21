@@ -35,7 +35,20 @@ export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Login" });
 
+export const githubLogin = passport.authenticate("github");
+export const postGithubLogin = (req, res) => {
+  res.send(routes.home);
+};
+
+export const githubLoginCallback = (
+  accessToken,
+  refreshToken,
+  profile,
+  cb
+) => {};
+
 export const logout = (req, res) => {
+  req.logout();
   res.redirect(routes.home);
 };
 export const users = (req, res) => res.render("users", { pageTitle: "Users" });

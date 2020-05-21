@@ -11,4 +11,22 @@ export const localMiddleware = (req, res, next) => {
   next();
 };
 
+export const onlyPublic = (req, res, next) => {
+  //로그인되지 않은 상태 요청 걸러주는 미들웨어
+  if (req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
+};
+
+export const onlyPrivate = (req, res, next) => {
+  //로그인되지 않은 상태 요청 걸러주는 미들웨어
+  if (req.user) {
+    next();
+  } else {
+    res.redirect(routes.home);
+  }
+};
+
 export const uploadVideo = multerVideo.single("videoFile"); //form의 name과 같게, 한개의 파일을 받음
