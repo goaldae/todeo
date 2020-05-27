@@ -1,12 +1,14 @@
 .social-login
+    button.social-login--facebook
+        a(href=routes.kakao, method="get")
+            span
+                .iconify(data-icon="vs-kakaotalk" data-inline="false")
+            |Continue with Kakao
     button.social-login--github
         a(href=routes.github, method="get")
             span
                 i.fab.fa-github
             |Continue with Github
-    button.social-login--facebook
-        span
-            i.fab.fa-facebook
-        |Continue with Facebook
+
 
 

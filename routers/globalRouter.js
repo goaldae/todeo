@@ -8,7 +8,9 @@ import {
   getLogin,
   logout,
   githubLogin,
-  postGithubLogin,
+  postSocialLogin,
+  kakaoLogin,
+  getMe,
 } from "../controllers/userController";
 import passport from "passport";
 import { onlyPublic, onlyPrivate } from "../middlewares";
@@ -21,14 +23,27 @@ globalRouter.get(routes.join, onlyPublic, getJoin);
 globalRouter.post(routes.login, onlyPublic, postLogin);
 globalRouter.get(routes.login, onlyPublic, getLogin);
 
+//github 로그인
 globalRouter.get(routes.github, githubLogin); //auth/github 요청으로 들어오는 깃헙로그인
 
 globalRouter.get(
   //auth/github/callback 요청으로 들어오는 깃헙로그인
   routes.githubCallback,
   passport.authenticate("github", { failureRedirect: "/login" }),
-  postGithubLogin
+  postSocialLogin
 );
+
+//kakao 로그인
+globalRouter.get(routes.kakao, kakaoLogin); //auth/github 요청으로 들어오는 깃헙로그인
+
+globalRouter.get(
+  //auth/github/callback 요청으로 들어오는 깃헙로그인
+  routes.kakaoCallback,
+  passport.authenticate("kakao", { failureRedirect: "/login" }),
+  postSocialLogin
+);
+
+globalRouter.get(routes.me, getMe);
 
 globalRouter.get(routes.home, home);
 globalRouter.get(routes.search, search);

@@ -294,8 +294,11 @@ input[type="submit"] {
     background-color: #444444;
     color: white; }
   .social-login .social-login--facebook {
-    background-color: #3a5998;
-    color: white; }
+    background-color: #ffe812;
+    color: #000000; }
+
+.iconify {
+  color: #000000; }
 
 .videoBlock video {
   margin-bottom: 10px;

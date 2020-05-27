@@ -10,6 +10,7 @@ const USERS = "/users";
 const USER_DETAIL = "/:id"; // ":"을 쓰면 값을 바꾸면서 넣을수있음 ->텍스트가 아님
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
+const ME = "/me";
 
 //videos
 const VIDEOS = "/videos";
@@ -21,6 +22,10 @@ const DELETE_VIDEO = "/:id/delete";
 //github
 const GITHUB = "/auth/github";
 const GITHUB_CALLBACK = "/auth/github/callback";
+
+//kakao
+const KAKAO = "/auth/kakao";
+const KAKAO_CALLBACK = "/auth/kakao/callback";
 
 const routes = {
   home: HOME,
@@ -63,6 +68,9 @@ const routes = {
   },
   github: GITHUB,
   githubCallback: GITHUB_CALLBACK,
+  kakao: KAKAO,
+  kakaoCallback: KAKAO_CALLBACK,
+  me: ME,
 };
 
 export default routes;

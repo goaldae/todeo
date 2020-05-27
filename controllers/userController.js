@@ -2,6 +2,7 @@ import routes from "../routes";
 import User from "../models/User";
 import passport from "passport";
 
+//로컬 로그인
 export const postJoin = async (req, res, next) => {
   console.log(req.body); //bodyParser 미들웨어로 중간에 값 가져올수있음
   const {
@@ -35,10 +36,8 @@ export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Login" });
 
+//github 로그인
 export const githubLogin = passport.authenticate("github");
-export const postGithubLogin = (req, res) => {
-  res.redirect(routes.home);
-};
 
 export const githubLoginCallback = async (
   accessToken,
@@ -67,13 +66,42 @@ export const githubLoginCallback = async (
   } catch (error) {}
 };
 
+//kakao 로그인
+export const kakaoLogin = passport.authenticate("kakao");
+
+export const kakaoLoginCallback = async (
+  accessToken,
+  refreshToken,
+  profile,
+  cb
+) => {
+  console.log(profile);
+
+  Kakao.Auth.loginForm({
+    success: function (authObj) {
+      alert(JSON.stringify(authObj));
+    },
+    fail: function (err) {
+      alert(JSON.stringify(err));
+    },
+  });
+};
+
+export const postSocialLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
 export const logout = (req, res) => {
   req.logout();
   res.redirect(routes.home);
 };
-export const users = (req, res) => res.render("users", { pageTitle: "Users" });
+
+export const getMe = (req, res) =>
+  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+
 export const userDetail = (req, res) =>
   res.render("userDetail", { pageTitle: "User Detail" });
+
 export const editPofile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit Profile" });
 export const changePassword = (req, res) =>
