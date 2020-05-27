@@ -99,10 +99,37 @@ export const logout = (req, res) => {
 export const getMe = (req, res) =>
   res.render("userDetail", { pageTitle: "User Detail", user: req.user });
 
-export const userDetail = (req, res) =>
-  res.render("userDetail", { pageTitle: "User Detail" });
+export const userDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const user = await User.findById(id);
+    res.render("userDetail", { pageTitle: "User Detail", user });
+    console.log(id);
+  } catch (error) {}
+};
 
-export const editPofile = (req, res) =>
+export const getEditPofile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit Profile" });
+
+export const postEditPofile = async (req, res) => {
+  const {
+    body: { name, email },
+    file, //원래 file:{path} 인데 file이 없으면 그냥 안받고 이전것으로 넣으려고 일단 file자체를 가져옴
+  } = req;
+  try {
+    const user = await User.findByIdAndUpdate(req.user.id, {
+      email,
+      name,
+      avatarUrl: file ? file.path : req.user.avatarUrl,
+    });
+    res.redirect(routes.me);
+  } catch (error) {
+    console.log(error);
+    res.render("editProfile", { pageTitle: "Edit Profile" });
+  }
+};
+
 export const changePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });

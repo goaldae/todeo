@@ -2,7 +2,7 @@ import routes from "./routes";
 import multer from "multer";
 
 const multerVideo = multer({ dest: "uploads/videos/" }); //비디오 업로드 경로 설정
-
+const multerAvatar = multer({ dest: "uploads/avatars/" }); //임시 방편
 export const localMiddleware = (req, res, next) => {
   res.locals.siteName = "Todeo";
   res.locals.routes = routes;
@@ -30,3 +30,4 @@ export const onlyPrivate = (req, res, next) => {
 };
 
 export const uploadVideo = multerVideo.single("videoFile"); //form의 name과 같게, 한개의 파일을 받음
+export const uploadAvatar = multerAvatar.single("avatar");
