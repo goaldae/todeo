@@ -106,8 +106,9 @@ export const userDetail = async (req, res) => {
   try {
     const user = await User.findById(id);
     res.render("userDetail", { pageTitle: "User Detail", user });
-    console.log(id);
-  } catch (error) {}
+  } catch (error) {
+    res.redirect(routes.home);
+  }
 };
 
 export const getEditPofile = (req, res) =>
@@ -131,5 +132,24 @@ export const postEditPofile = async (req, res) => {
   }
 };
 
-export const changePassword = (req, res) =>
+//비밀번호 변경
+export const getChangePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });
+
+export const postChangePassword = async (req, res) => {
+  const {
+    body: { oldPassword, newPassword, verifyPassword },
+  } = req;
+  if (newPassword !== verifyPassword) {
+    res.status(400);
+    res.redirect(`/users${routes.changePassword}`);
+    return;
+  }
+  try {
+    await req.user.changePassword(oldPassword, newPassword);
+    res.redirect(routes.me);
+  } catch (error) {
+    res.status(400);
+    res.redirect(`/users${routes.changePassword}`);
+  }
+};
