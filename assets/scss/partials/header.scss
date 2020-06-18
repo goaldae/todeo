@@ -22,10 +22,12 @@
         justify-self: end;
       }
       ul {
+        a {
+          color: white;
+        }
         display: flex;
         color: white;
         font-weight: 600;
-        max-width: none;
         text-transform: uppercase;
         li:not(:last-child) {
           margin-right: 15px;
@@ -40,6 +42,7 @@
           font-size: 14px;
           color: $black;
           font-weight: 600;
+          max-width: none;
           &::placeholder {
             font-weight: 300;
             color: rgba(0, 0, 0, 0.7);
