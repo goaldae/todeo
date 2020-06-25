@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+import apiRouter from "./routers/apiRouter";
 import routes from "./routes";
 import { localMiddleware } from "./middlewares";
 import passport from "passport"; //passport 모듈
@@ -51,5 +52,6 @@ app.use(localMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.videos, videoRouter);
 app.use(routes.users, userRouter); //user 라우터를 "사용(use)"함
+app.use(routes.api, apiRouter);
 
 export default app;
