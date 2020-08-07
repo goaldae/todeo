@@ -2,6 +2,7 @@ import passport from "passport";
 import GitHubStrategy from "passport-github";
 import KakaoStrategy from "passport-kakao";
 import User from "./models/User";
+
 import {
   githubLoginCallback,
   kakaoLoginCallback,
@@ -25,11 +26,16 @@ passport.use(
   new KakaoStrategy(
     {
       clientID: process.env.KAKAO_ID,
+      clientSecret: process.env.KAKAO_SECRET,
       callbackURL: `http://localhost:4000${routes.kakaoCallback}`,
     },
     kakaoLoginCallback
   )
 );
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});

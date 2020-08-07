@@ -63,7 +63,9 @@ export const githubLoginCallback = async (
       avatarUrl: avatar_url,
     });
     return cb(null, newUser);
-  } catch (error) {}
+  } catch (error) {
+    return cd(error);
+  }
 };
 
 //kakao 로그인
@@ -75,16 +77,36 @@ export const kakaoLoginCallback = async (
   profile,
   cb
 ) => {
+  const {
+    id,
+    username: name,
+    _json: {
+      properties: { profile_image },
+      kakao_account: { email },
+    },
+  } = profile;
   console.log(profile);
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      // user.githubId = id;
+      // user.save();
+      //안해도 되지 않나..?
+      console.log("a:", user);
+      return cb(null, user);
+    }
 
-  Kakao.Auth.loginForm({
-    success: function (authObj) {
-      alert(JSON.stringify(authObj));
-    },
-    fail: function (err) {
-      alert(JSON.stringify(err));
-    },
-  });
+    const newUser = await User.create({
+      email,
+      name,
+      kakaoId: id,
+      avatarUrl: profile_image,
+    });
+    console.log("b:", newUser);
+    return cb(null, newUser);
+  } catch (error) {
+    return cd(error);
+  }
 };
 
 export const postSocialLogin = (req, res) => {
