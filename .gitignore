@@ -119,3 +119,4 @@ package-lock.json
 .yarn/build-state.yml
 .pnp.*
 static
+build

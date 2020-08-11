@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import "./db"; //DB 연결만
 import app from "./app";
 

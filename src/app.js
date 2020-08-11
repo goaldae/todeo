@@ -4,6 +4,7 @@
 import express from "express";
 import morgan from "morgan";
 import helmet from "helmet";
+import path from "path";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import userRouter from "./routers/userRouter";
@@ -25,8 +26,9 @@ const CookieStore = MongoStore(session); //session 객체가 필요함
 //미들웨어
 app.use(helmet()); //보안 기능
 app.set("view engine", "pug"); //view engine 설정
-app.use("/uploads", express.static("uploads")); //일단 /uploads 경로에 있는 것을 가져다 쓰겠다.
-app.use("/static", express.static("static"));
+app.set("views", path.join(__dirname, "views"));
+//app.use("/uploads", express.static("uploads")); //일단 /uploads 경로에 있는 것을 가져다 쓰겠다.
+app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(cookieParser());
 app.use(morgan("tiny")); //로거
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -43,6 +45,7 @@ app.use(
     }),
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
