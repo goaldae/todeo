@@ -85,14 +85,14 @@ export const kakaoLoginCallback = async (
       kakao_account: { email },
     },
   } = profile;
-  console.log(profile);
+
   try {
     const user = await User.findOne({ email });
     if (user) {
       // user.githubId = id;
       // user.save();
       //안해도 되지 않나..?
-      console.log("a:", user);
+
       return cb(null, user);
     }
 
@@ -102,7 +102,7 @@ export const kakaoLoginCallback = async (
       kakaoId: id,
       avatarUrl: profile_image,
     });
-    console.log("b:", newUser);
+
     return cb(null, newUser);
   } catch (error) {
     return cd(error);

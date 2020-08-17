@@ -7,7 +7,7 @@ block content
             src : video.fileUrl
         })
         .video__info
-            if(loggedUser!==null && loggedUser.id===video.creator.id)
+            if(loggedUser!==null && loggedUser._id===String(video.creator._id))
                 a(href=routes.editVideo(video.id))
                     button Edit video
             h5.video__title=video.title
