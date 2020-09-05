@@ -17,7 +17,13 @@ const multerVideo = multer({
     bucket: "todeo/video",
   }),
 }); //비디오 업로드 경로 설정
-const multerAvatar = multer({ dest: "uploads/avatars/" }); //임시 방편
+const multerAvatar = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "todeo/avatar",
+  }),
+}); //프로필 사진 업로드 경로 설정
 
 export const uploadVideo = multerVideo.single("videoFile"); //form의 name과 같게, 한개의 파일을 받음
 export const uploadAvatar = multerAvatar.single("avatar");
