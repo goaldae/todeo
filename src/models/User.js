@@ -24,6 +24,9 @@ const UserSchema = new mongoose.Schema({
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 //resetAttempt, changePassword, setPassword 등 여러 기능을 UserSchema에 사용하게 할 수 있음
 
+UserSchema.set("toJSON", {
+  virtuals: true,
+});
 const model = mongoose.model("User", UserSchema);
 
 export default model;

@@ -30,6 +30,9 @@ const VideoSchema = new mongoose.Schema({
   },
 });
 
+VideoSchema.set("toJSON", {
+  virtuals: true,
+});
 const model = mongoose.model("Video", VideoSchema);
 
 export default model;

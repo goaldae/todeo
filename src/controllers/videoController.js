@@ -1,6 +1,7 @@
 import routes from "../routes";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
+import User from "../models/User";
 
 export const home = async (req, res) => {
   try {
@@ -41,10 +42,12 @@ export const postUpload = async (req, res) => {
     fileUrl: location,
     title,
     description,
-    creator: req.user._id,
+    creator: req.user.id,
   });
-  req.user.videos.push(newVideo._id);
-  res.redirect(routes.videoDetail(newVideo._id));
+  const userModel = await User.findById(req.user.id);
+  userModel.videos.push(newVideo.id);
+  userModel.save();
+  res.redirect(routes.videoDetail(newVideo.id));
 };
 
 export const videoDetail = async (req, res) => {
@@ -55,8 +58,7 @@ export const videoDetail = async (req, res) => {
     const video = await Video.findById(id)
       .populate("creator")
       .populate("comments");
-    console.log("video.creator._id: ", video.creator._id);
-    console.log("res.locals.loggedUser._id: ", res.locals.loggedUser._id);
+
     res.render("videoDetail", { pageTitle: "Video Detail", video });
   } catch (error) {
     console.log(error);
@@ -70,7 +72,7 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id).populate("creator");
-    if (video.creator._id !== req.user._id) {
+    if (video.creator.id !== req.user.id) {
       throw Error();
     } else {
       res.render("editVideo", { pageTitle: "Edit Video", video });
@@ -133,13 +135,18 @@ export const postAddComment = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
+    const userModel = await User.findById(user.id);
     const newComment = await Comment.create({
       text: comment,
       creator: user.id,
     });
+
     video.comments.push(newComment.id);
     video.save();
+    userModel.comments.push(newComment.id);
+    userModel.save();
   } catch (error) {
+    console.log(error);
     res.status(400);
   } finally {
     res.end();
