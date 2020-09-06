@@ -31,7 +31,7 @@
 ### Videos
 > 비디오 업로드 및 삭제, 비디오 검색, 비디오 수정, 댓글 달기를 구현했습니다. AJAX를 이용한 댓글 달기, 댓글 수 업데이트를 수행합니다.
 
-## Pages:
+## Pages
 - Home
 > ![home](https://user-images.githubusercontent.com/26589904/92317872-877e5c80-f040-11ea-86a9-615485275f43.PNG)
 
