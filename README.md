@@ -32,15 +32,34 @@
 > 비디오 업로드 및 삭제, 비디오 검색, 비디오 수정, 댓글 달기를 구현했습니다. AJAX를 이용한 댓글 달기, 댓글 수 업데이트를 수행합니다.
 
 ## Pages:
-
 - Home
------------
+> ![home](https://user-images.githubusercontent.com/26589904/92317872-877e5c80-f040-11ea-86a9-615485275f43.PNG)
+
+- Join
+
+> ![join](https://user-images.githubusercontent.com/26589904/92317875-8d743d80-f040-11ea-9fa3-9e74046b3fa7.PNG)
 
 - Login
-- Search
-- Join
+
+> ![login](https://user-images.githubusercontent.com/26589904/92317879-92d18800-f040-11ea-8966-5a10cf1de650.PNG)
+
 - User Detail
+
+> ![userdetail](https://user-images.githubusercontent.com/26589904/92317883-97963c00-f040-11ea-8b03-d9c33e3aab82.PNG)
+
 - Edit Profile
-- Change Password
-- Upload
+![editprofile](https://user-images.githubusercontent.com/26589904/92317887-9f55e080-f040-11ea-9819-0803c5cd28ab.PNG)
+
+- Upload Video
+>![upload video1](https://user-images.githubusercontent.com/26589904/92317890-a7ae1b80-f040-11ea-9ae7-1bcfbe243733.PNG)
+
+>![upload video](https://user-images.githubusercontent.com/26589904/92317891-a8df4880-f040-11ea-8a7a-6a0c948a9926.PNG)
+
+- Search Video
+>![search](https://user-images.githubusercontent.com/26589904/92317896-b1d01a00-f040-11ea-8a09-e89a56ad2c66.PNG)
+
+- Video Detail
+>![videoDetail](https://user-images.githubusercontent.com/26589904/92317900-b7c5fb00-f040-11ea-9e95-7b41299ede07.PNG)
+
 - Edit Video
+>![edit video](https://user-images.githubusercontent.com/26589904/92317903-bf859f80-f040-11ea-97d7-3e418a31eb13.PNG)
